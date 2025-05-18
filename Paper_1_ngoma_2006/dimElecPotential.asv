@@ -1,0 +1,92 @@
+function [ phi_star ] = dimElecPotential(K, h1_star,  N, resultType)
+
+% Created by Aayush Bhakna CH22B008
+% Equations were taken from Ngoma 2006
+
+% ODE solvers like ode23s, ode45 and bvp4c were not used as the results
+% showed that jacobian was highly ill-conditioned
+
+% As such, finite difference approximation was used instead
+
+%-------------------------------------------------------------------------%
+
+% DIMENSIONLESS FORM
+
+% Height of Interface
+h1_star = h1 / h;
+
+% Dybe-Heckel Parameter
+kappa = z_nott * e * (( (2 * n_inf) / (eps * eps_nott * k_b * T) )^0.5);
+K = kappa * h;
+
+% Elementary Thermal Voltage
+phi_T = k_b * T / (z_nott * e);
+
+zeta1_star = zeta1 / phi_T;
+zeta2_star = zeta2 / phi_T;
+
+%-------------------------------------------------------------------------%
+
+% ELECTRIC POTENTIAL ( NUMERICAL )
+
+% Finite Difference Method
+
+ymesh = linspace(0, h1_star, N);
+del_y = ymesh(2) - ymesh(1);
+
+ymesh = ymesh';
+
+C = 2 + ((K * del_y)^2);
+
+A = zeros(N, N);
+b = zeros(N, 1);
+
+A(1, 1) = 1;
+A(N, N) = 1;
+
+for i = 2:(N-1)
+    A(i, i-1) = 1;
+    A(i, i) = -C;
+    A(i, i+1) = 1;
+end
+
+b(1) = zeta1_star;
+b(end) = zeta2_star;
+
+phi_star_num = inv(A) * b;
+
+%-------------------------------------------------------------------------%
+
+% ELECTRIC POTENTIAL ( ANALYTICAL )
+
+phi_star_ana = analyticSol(K, h1_star, zeta1_star, zeta2_star, ymesh);
+
+%-------------------------------------------------------------------------%
+
+% OUTPUT
+
+if resultType == "numerical"
+    phi_star = phi_star_num;
+elseif resultType == "analytical"
+    phi_star = phi_star_ana;
+else
+    error('Please mention correct result type : "numerical" or "analytical"')
+end
+
+end
+
+%-------------------------------------------------------------------------%
+
+% ANALYTICAL FUNCTION
+
+function [ output ] = analyticSol(K, h1_star, zeta1_star, zeta2_star, y_star)
+
+var1 = zeta2_star .* sinh( K .* y_star );
+var2 = zeta1_star .* sinh( K .* (y_star - h1_star) );
+var3 = sinh( K * h1_star );
+
+output = (var1 - var2) ./ var3;
+
+end
+
+%-------------------------------------------------------------------------%

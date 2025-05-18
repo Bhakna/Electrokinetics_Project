@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<struct>
+    <const>
+        <eps_o>8.854e-12</eps_o>
+        <e>1.6022e-19</e>
+        <k_b>1.3807e-23</k_b>
+        <N_A>6.022e+23</N_A>
+    </const>
+    <system>
+        <T>298</T>
+        <E_ext>500000</E_ext>
+        <L>1.5e-05</L>
+        <H>3e-05</H>
+        <H_int>2e-05</H_int>
+        <N_y>100</N_y>
+        <N_z>50</N_z>
+        <Z_b>-0.024</Z_b>
+        <Z_s>-0.024</Z_s>
+        <Z_int>-0.024</Z_int>
+    </system>
+    <fluid>
+        <z>1</z>
+        <M_bulk>0.001</M_bulk>
+        <n_inf>6.022e+23</n_inf>
+        <eps>80</eps>
+        <mu>0.001</mu>
+    </fluid>
+    <scheme>
+        <analyticalSol>mathematica</analyticalSol>
+        <numericalSol>gaussSeidel</numericalSol>
+        <numSORw>0.85</numSORw>
+    </scheme>
+</struct>

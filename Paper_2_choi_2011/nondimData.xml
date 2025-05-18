@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<struct>
+    <N1>200</N1>
+    <N2>200</N2>
+    <h1_star>0.8</h1_star>
+    <h2_star>0.2</h2_star>
+    <K1>32.8786</K1>
+    <K2>206.6388</K2>
+    <zeta1_star>1.4925</zeta1_star>
+    <zeta2_star>0.24944</zeta2_star>
+    <zeta_int_star>0</zeta_int_star>
+    <alpha_e>0.025316</alpha_e>
+    <q_int_star>-33.0515</q_int_star>
+    <q_1_star>-45.936</q_1_star>
+    <q_2_star>-46.4682</q_2_star>
+    <u_h1>-0.014324</u_h1>
+    <u_h2>-9.9581e-05</u_h2>
+</struct>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<struct>
+    <const>
+        <eps_nott>8.854e-12</eps_nott>
+        <e>1.6022e-19</e>
+        <k_b>1.3807e-23</k_b>
+        <N_A>6.022e+23</N_A>
+    </const>
+    <system>
+        <T>296.15</T>
+        <h>1e-07</h>
+        <E_ext>500000</E_ext>
+        <zeta_int>0</zeta_int>
+        <q_int>-0.0048</q_int>
+    </system>
+    <fluid1>
+        <z1>1</z1>
+        <n1_inf>6.022e+23</n1_inf>
+        <eps_r1>79</eps_r1>
+        <h1>8e-08</h1>
+        <zeta_1>0.03809</zeta_1>
+        <q_1>-0.0082</q_1>
+        <mu_1>0.00093</mu_1>
+        <N1>200</N1>
+    </fluid1>
+    <fluid2>
+        <z2>1</z2>
+        <n2_inf>6.022e+23</n2_inf>
+        <eps_r2>2</eps_r2>
+        <zeta_2>-1.449e-20</zeta_2>
+        <q_2>-0.00021</q_2>
+        <mu_2>0.000566</mu_2>
+        <N2>200</N2>
+        <h2>2e-08</h2>
+    </fluid2>
+</struct>

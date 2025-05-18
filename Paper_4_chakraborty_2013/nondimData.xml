@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<struct>
+    <N_y>51</N_y>
+    <N_z>51</N_z>
+    <D_h>1.7778e-07</D_h>
+    <h1_star>0.45</h1_star>
+    <l_star>0.5625</l_star>
+    <lambda_D>9.618e-09</lambda_D>
+    <De>0.054101</De>
+    <Z_b_star>1</Z_b_star>
+    <Z_s_star>1</Z_s_star>
+    <Z_int_star>-0.54484</Z_int_star>
+    <u_ref>-0.014324</u_ref>
+    <gamma_r>-1</gamma_r>
+    <anaSolFunc>mathematica</anaSolFunc>
+    <numSolFunc>gaussJacobi</numSolFunc>
+    <numSORw>1</numSORw>
+</struct>

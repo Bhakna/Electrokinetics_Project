@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<struct>
+    <const>
+        <eps_o>8.854e-12</eps_o>
+        <e>1.6022e-19</e>
+        <k_b>1.3807e-23</k_b>
+    </const>
+    <system>
+        <T>298</T>
+        <R>3.5e-05</R>
+        <r_o>1.7e-05</r_o>
+        <E_ext>500000</E_ext>
+        <zeta_wall>-0.024</zeta_wall>
+        <zeta_int>0.012</zeta_int>
+        <q_int>0</q_int>
+    </system>
+    <fluid_c>
+        <z_c>1</z_c>
+        <n_c_inf>6.022e+20</n_c_inf>
+        <eps_c>80</eps_c>
+        <mu_c>0.001</mu_c>
+        <Nc>200</Nc>
+    </fluid_c>
+    <fluid_a>
+        <z_a>1</z_a>
+        <n_a_inf>6.022e+20</n_a_inf>
+        <eps_a>80</eps_a>
+        <mu_a>0.001</mu_a>
+        <Na>200</Na>
+    </fluid_a>
+</struct>

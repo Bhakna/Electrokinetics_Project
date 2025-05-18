@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<struct>
+    <zeta1>0</zeta1>
+    <zeta2>0</zeta2>
+    <eps>79</eps>
+    <z_nott>1</z_nott>
+    <n_inf>6.022e+23</n_inf>
+    <L>0.02</L>
+    <h>100e-9</h>
+    <h1>80e-9</h1>
+    <E_ext>5e5</E_ext>
+    <T>296.15</T>
+    <u_nott>1</u_nott>
+    <N>199</N>
+    <mu>0.93e-3</mu>
+    <alpha>2.4398</alpha>
+    <del_p>0</del_p>
+    <resultType>numerical</resultType>
+</struct>

@@ -1,0 +1,50 @@
+function [ Q_star ] = dimVolFlowRate(h1_star, N, u_star)
+
+%-------------------------------------------------------------------------%
+
+% CREATING MESH FOR SYSTEM
+
+% Fluid 1
+ymesh1 = linspace(0, h1_star, N);
+del_y1 = ymesh1(2) - ymesh1(1);
+u1_star = u_star(1:N);
+
+% Fluid 2
+ymesh2 = linspace(h1_star, 1, N);
+del_y2 = ymesh2(2) - ymesh2(1);
+u2_star = u_star(N:end);
+
+% Note : ymesh2(1) was ignored as its already represented by ymesh1(end)
+
+%-------------------------------------------------------------------------%
+
+% INTEGRATION
+
+% Dimensionless Flow Rate in Fluid 1
+Q1_star = Integral(del_y1, u1_star);
+
+% Dimensionless Flow Rate in Fluid 2
+Q2_star = Integral(del_y2, u2_star);
+
+%-------------------------------------------------------------------------%
+
+% OUTPUT
+
+Q_star = zeros(2, 1);
+Q_star(1) = Q1_star;
+Q_star(2) = Q2_star;
+
+end
+
+%-------------------------------------------------------------------------%
+
+% LOCAL FUNCTION
+
+function [ output ] = Integral(del_x, y)
+
+% Integration using trapezoid method
+output = (del_x / 2) * (y(1) + y(end) + (2*sum(y(2:end-1), "all")));
+
+end
+
+%-------------------------------------------------------------------------%

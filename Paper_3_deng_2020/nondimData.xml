@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<struct>
+    <N_c>200</N_c>
+    <N_a>200</N_a>
+    <r_o_star>0.48571</r_o_star>
+    <lambda_D_c>3.0702e-07</lambda_D_c>
+    <lambda_D_a>3.0702e-07</lambda_D_a>
+    <Kc>113.9981</Kc>
+    <Ka>113.9981</Ka>
+    <zeta_wall_star>-0.93457</zeta_wall_star>
+    <beta>1</beta>
+    <zeta_int_star>0.46729</zeta_int_star>
+    <q_int_star>0</q_int_star>
+    <u_h>0.0084998</u_h>
+</struct>

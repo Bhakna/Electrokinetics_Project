@@ -1,0 +1,163 @@
+% Prof Project under Dr Renganathan
+% Paper - 1
+% Paper : Ngoma 2006
+
+% Aayush Bhakna
+% CH22B008
+
+clear variables;
+clc;
+
+%-------------------------------------------------------------------------%
+
+% PARAMETERS
+
+% Zeta Potential at Bottom Plate
+zeta1 = -0.012;         % in V
+
+% Zeta Potential at Interface
+zeta2 = -0.012;         % in V
+
+% Permittivity of Vacuum
+eps_nott = 8.854e-12;   % in C m^-1 V^-1
+
+% Dimensionless Dielectric Constant
+eps = 80;
+
+% Valence of Ions
+z_nott = 1;
+
+% Ionic Number Conc in Bulk Solution
+n_inf = 6.022e20;       % in m^-3
+
+% Length of Plates ( X - axis )
+L = 0.02;               % in m
+
+% Distance between Plates ( Y - axis )
+h = 35e-6;              % in m
+
+% Height of Interface
+h1 = 34.99e-6;             % in m
+
+% Elementary charge in Coulombs
+e = 1.6022e-19;
+
+% External Electric Field in V/m
+E = 5e4;
+
+% Boltzmann Constant in J/K
+k_b = 1.38065e-23;
+
+% Temprature in Kelvin
+T = 300; 
+
+% Reference Velocity in m/s
+u_nott = 1;
+
+% Grid Size
+N = 100;
+
+% Viscosity of Conducting Fluid ( Bottom ) in Pa*s
+mu = 0.001;
+
+% Ratio of Viscosity
+alpha = 10;
+
+% Pressure Difference in pascals
+del_p = 25e3;
+Px = del_p / L;
+
+%-------------------------------------------------------------------------%
+
+% DIMENSIONLESS FORM
+
+% Height of Interface
+h1_star = h1 / h;
+
+% Dybe-Heckel Parameter
+kappa = z_nott * e * (( (2 * n_inf) / (eps * eps_nott * k_b * T) )^0.5);
+K = kappa * h;
+
+% Elementary Thermal Voltage
+phi_T = k_b * T / (z_nott * e);
+
+zeta1_star = zeta1 / phi_T;
+zeta2_star = zeta2 / phi_T;
+
+% Helmholtz–Smoluchowski electroosmotic velocity
+u_h = E * eps * eps_nott * k_b * T / ( z_nott * e * mu );
+
+C0 = (h^2) * Px / ( mu * u_nott );
+C1 = u_h / u_nott;
+C2 = (h^2) * Px / ( alpha * mu * u_nott );
+
+%-------------------------------------------------------------------------%
+
+% ELECTRIC POTENTIAL
+
+resultType = "numerical";
+phi_star = dimElecPotential(K, h1_star, zeta1_star, zeta2_star, ...
+    N, resultType);
+
+resultType = "analytical";
+phi_star = dimElecPotential(K, h1_star, zeta1_star, zeta2_star, ...
+    N, resultType);
+
+%-------------------------------------------------------------------------%
+
+% FLUID VELOCITY
+
+u_star = dimVelocityField(K, C0, C1, C2, alpha, h1_star, N, phi_star);
+u1_star = u_star(1:N);
+
+%-------------------------------------------------------------------------%
+
+% ANALYTICAL SOLUTION FOR VELOCITY
+
+% Provided by Mala et al
+
+% characteristic distance between plates
+a = h/2;
+
+% 1-D mesh in y-axis
+ymesh = linspace(0, h, N);
+ymesh = ymesh ./ a;            % dimensionless
+ymesh = ymesh - 1;             % shifting by 1
+ymesh = ymesh';
+
+% Debye–Huckle parameter
+k = z_nott * e * ((2 * n_inf / (eps * eps_nott * k_b * T))^0.5);
+K = k * a;
+
+% Constants
+G1 = (a^2) * Px / (mu * u_nott);
+G2 = n_inf * z_nott * e * (a^2) / (mu * u_nott);
+
+% Solution
+u1_star_ana = ((G1./2) .* (1 - (ymesh.^2))) - ...
+    (2.*G2.*E.*zeta1_star./(K^2)).*(1 - (phi_star ./ zeta1_star));
+
+
+%-------------------------------------------------------------------------%
+
+% VALIDATING RESULTS
+
+figure('Name', "Validating Velocity Profile")
+hold on
+plot(ymesh, u1_star, LineWidth=1.75, LineStyle="-")
+scatter(ymesh, u1_star_ana, 50, "black")
+hold off
+legend('Numerical', 'Analytical', Location='best')
+xlabel('Dimensionless Distance Between Plates')
+ylabel('Dimensionless Velocity')
+title('Velocity Profile')
+
+figure('Name', "Validating Potential Field")
+hold on
+plot(ymesh, u1_star, LineWidth=1.75, LineStyle="-")
+scatter(ymesh, u1_star_ana, 50, "black")
+hold off
+legend('Numerical', 'Analytical', Location='best')
+xlabel('Dimensionless Distance Between Plates')
+ylabel('Dimensionless Velocity')
+title('Potential Field')
